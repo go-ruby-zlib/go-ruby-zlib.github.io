@@ -1,0 +1,31 @@
+baseURL = "https://go-ruby-zlib.github.io/"
+title = "go-ruby-zlib"
+disableKinds = ["taxonomy", "term", "RSS", "sitemap", "404"]
+
+[markup.goldmark.renderer]
+  unsafe = true
+
+[[params.phases]]
+  name = "Deflate / Inflate"
+  status = "ready"
+  blurb = "`Deflate(data, level)` / `Inflate(data)` — zlib-stream compression at any level, mirroring `Zlib::Deflate.deflate` / `Zlib::Inflate.inflate`; round-trips and interoperates with MRI in both directions."
+[[params.phases]]
+  name = "Gzip round-trip"
+  status = "ready"
+  blurb = "`GzipCompress` / `GzipDecompress` mirror `Zlib::GzipWriter` / `Zlib::GzipReader`, with a deterministic (zero) header mtime; compare by decompressed payload + CRC, not raw gzip bytes."
+[[params.phases]]
+  name = "Byte-exact checksums"
+  status = "ready"
+  blurb = "`Crc32` / `Adler32` and `Crc32Combine` / `Adler32Combine` — **byte-exact** with MRI, with seeded (running) checksums; a value computed here equals the integer MRI prints."
+[[params.phases]]
+  name = "Streaming Deflater / Inflater"
+  status = "ready"
+  blurb = "The `Zlib::Deflate.new(level).deflate(s, flush).finish` / `Zlib::Inflate.new.inflate(s)` idiom, with `NoFlush`/`SyncFlush`/`FullFlush`/`Finish` modes and the `TotalIn` / `TotalOut` / `Adler` / `Finished` accessors."
+[[params.phases]]
+  name = "Constants & errors"
+  status = "ready"
+  blurb = "Compression levels, strategies, flush modes, `Version` / `ZlibVersion`, and an `*Error` family carrying MRI's class names (`Zlib::StreamError`, `Zlib::BufError`, `Zlib::DataError`, `Zlib::GzipFile::Error`)."
+[[params.phases]]
+  name = "Differential oracle & coverage"
+  status = "ready"
+  blurb = "Checksums and `combine` values compared byte-exact with the system `ruby`; deflate / gzip / streaming round-tripped through MRI in both directions. 100% coverage, gofmt + go vet clean, green across all six 64-bit Go arches and three OSes."
